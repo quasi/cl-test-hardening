@@ -8,7 +8,8 @@
 (in-package #:th.property-tests/generators)
 
 (def-suite generator-tests
-  :description "Tests for th.gen generators")
+  :description "Tests for th.gen generators"
+  :in :th.property-tests)
 
 (in-suite generator-tests)
 

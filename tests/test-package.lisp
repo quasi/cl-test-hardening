@@ -5,21 +5,11 @@
 
 (in-package #:th.tests)
 
+;; Root test suite - individual test files add themselves as children
 (def-suite :th.tests
   :description "All cl-test-hardening tests")
 
+;; Parent suites for each module - child suites defined in respective test files
 (def-suite :th.property-tests
   :description "Property testing module tests"
-  :in :th.tests)
-
-(def-suite :th.mutation-tests
-  :description "Mutation testing module tests"
-  :in :th.tests)
-
-(def-suite :th.contract-tests
-  :description "Contract testing module tests"
-  :in :th.tests)
-
-(def-suite :th.agent-tests
-  :description "Agent verification module tests"
   :in :th.tests)

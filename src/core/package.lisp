@@ -6,11 +6,11 @@
   (:export
    ;; Result protocol
    #:verification-result
-   #:result-passed-p
-   #:result-summary
-   #:result-details
-   #:result-timestamp
-   #:result-duration-ms
+   #:verification-result-passed-p
+   #:verification-result-timestamp
+   #:verification-result-duration-ms
+   #:verification-result-summary
+   #:verification-result-details
 
    ;; Reporting protocol
    #:format-result

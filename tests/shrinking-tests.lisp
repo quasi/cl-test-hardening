@@ -7,7 +7,8 @@
 (in-package #:th.property-tests/shrinking)
 
 (def-suite shrinking-tests
-  :description "Tests for th.property shrinking")
+  :description "Tests for th.property shrinking"
+  :in :th.property-tests)
 
 (in-suite shrinking-tests)
 

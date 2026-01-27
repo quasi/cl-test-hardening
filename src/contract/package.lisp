@@ -2,7 +2,7 @@
 ;;;; ABOUTME: Defines th.contract package for consumer-driven contract testing
 
 (defpackage #:th.contract
-  (:use #:cl #:alexandria #:th.core)
+  (:use #:cl #:alexandria)
   (:export
    ;; Contract definition
    #:define-contract
@@ -39,10 +39,10 @@
    #:schema-fields
 
    ;; Verification results
-   #:verification-result
-   #:verification-result-passed
-   #:verification-result-failed
-   #:verification-result-errors
+   #:contract-verification-result
+   #:contract-verification-result-passed
+   #:contract-verification-result-failed
+   #:contract-verification-result-errors
    #:format-verification-report
 
    ;; Registry access

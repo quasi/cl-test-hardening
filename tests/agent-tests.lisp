@@ -10,7 +10,8 @@
 ;;;; Test Suite Definition
 
 (def-suite th.agent-tests
-  :description "Tests for Agent Verification DSL")
+  :description "Tests for Agent Verification DSL"
+  :in :th.tests)
 
 (in-suite th.agent-tests)
 

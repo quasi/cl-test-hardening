@@ -7,7 +7,8 @@
 (in-package #:th.contract-tests)
 
 (def-suite th.contract-tests
-  :description "Tests for th.contract")
+  :description "Tests for th.contract"
+  :in :th.tests)
 
 (in-suite th.contract-tests)
 

@@ -8,7 +8,8 @@
 (in-package #:th.property-tests/properties)
 
 (def-suite property-tests
-  :description "Tests for th.property property checking")
+  :description "Tests for th.property property checking"
+  :in :th.property-tests)
 
 (in-suite property-tests)
 

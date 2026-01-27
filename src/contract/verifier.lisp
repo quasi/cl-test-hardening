@@ -11,10 +11,10 @@
    SETUP-FN: Function called with provider state before each interaction
    TEARDOWN-FN: Function called after each interaction
    TIMEOUT: Request timeout in seconds (default 30)
-   Returns verification-result."
+   Returns contract-verification-result."
   (let* ((contract (find-contract contract-name))
          (start-time (get-internal-real-time))
-         (result (make-verification-result
+         (result (make-contract-verification-result
                   :contract-name contract-name
                   :provider-url against)))
     (unless contract
@@ -27,16 +27,16 @@
                                             :setup-fn setup-fn
                                             :teardown-fn teardown-fn
                                             :timeout (or timeout 30))))
-        (push int-result (verification-result-interaction-results result))
+        (push int-result (contract-verification-result-interaction-results result))
         (case (interaction-result-status int-result)
-          (:passed (incf (verification-result-passed result)))
-          (:failed (incf (verification-result-failed result))
-                   (push int-result (verification-result-errors result)))
-          (:error (incf (verification-result-failed result))
-                  (push int-result (verification-result-errors result))))))
+          (:passed (incf (contract-verification-result-passed result)))
+          (:failed (incf (contract-verification-result-failed result))
+                   (push int-result (contract-verification-result-errors result)))
+          (:error (incf (contract-verification-result-failed result))
+                  (push int-result (contract-verification-result-errors result))))))
 
     ;; Calculate duration
-    (setf (verification-result-duration-ms result)
+    (setf (contract-verification-result-duration-ms result)
           (round (* 1000 (/ (- (get-internal-real-time) start-time)
                            internal-time-units-per-second))))
     result))
@@ -149,15 +149,15 @@
 
 (defun verification-passed-p (result)
   "Check if verification passed (no failures)."
-  (zerop (verification-result-failed result)))
+  (zerop (contract-verification-result-failed result)))
 
 (defun verification-score (result)
   "Calculate verification score as ratio of passed to total."
-  (let ((total (+ (verification-result-passed result)
-                  (verification-result-failed result))))
+  (let ((total (+ (contract-verification-result-passed result)
+                  (contract-verification-result-failed result))))
     (if (zerop total)
         1.0
-        (float (/ (verification-result-passed result) total)))))
+        (float (/ (contract-verification-result-passed result) total)))))
 
 ;;;; Can-I-Deploy Check (Stub for broker integration)
 

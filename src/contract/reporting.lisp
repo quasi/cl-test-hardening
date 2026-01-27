@@ -14,14 +14,14 @@
   (format stream "~%")
 
   ;; Summary
-  (format stream "Contract: ~A~%" (verification-result-contract-name result))
-  (format stream "Provider: ~A~%" (or (verification-result-provider-url result) "N/A"))
-  (format stream "Duration: ~Ams~%" (verification-result-duration-ms result))
+  (format stream "Contract: ~A~%" (contract-verification-result-contract-name result))
+  (format stream "Provider: ~A~%" (or (contract-verification-result-provider-url result) "N/A"))
+  (format stream "Duration: ~Ams~%" (contract-verification-result-duration-ms result))
   (format stream "~%")
 
   ;; Results
-  (let ((passed (verification-result-passed result))
-        (failed (verification-result-failed result)))
+  (let ((passed (contract-verification-result-passed result))
+        (failed (contract-verification-result-failed result)))
     (format stream "Results: ~A passed, ~A failed (~,1F%)~%"
             passed failed
             (* 100 (verification-score result)))
@@ -39,16 +39,16 @@
   (format stream "Interaction Details:~%")
   (format stream "-------------------------------------------------------------------~%")
 
-  (dolist (int-result (reverse (verification-result-interaction-results result)))
+  (dolist (int-result (reverse (contract-verification-result-interaction-results result)))
     (format-interaction-result int-result stream))
 
   ;; Failures
-  (when (verification-result-errors result)
+  (when (contract-verification-result-errors result)
     (format stream "~%")
     (format stream "-------------------------------------------------------------------~%")
     (format stream "Failure Details:~%")
     (format stream "-------------------------------------------------------------------~%")
-    (dolist (error (reverse (verification-result-errors result)))
+    (dolist (error (reverse (contract-verification-result-errors result)))
       (format-failure-detail error stream)))
 
   (format stream "~%")
@@ -90,17 +90,17 @@
   "Convert verification result to JSON-compatible hash table."
   (let ((json (make-hash-table :test 'equal)))
     (setf (gethash "contractName" json)
-          (symbol-name (verification-result-contract-name result)))
+          (symbol-name (contract-verification-result-contract-name result)))
     (setf (gethash "providerUrl" json)
-          (verification-result-provider-url result))
-    (setf (gethash "passed" json) (verification-result-passed result))
-    (setf (gethash "failed" json) (verification-result-failed result))
+          (contract-verification-result-provider-url result))
+    (setf (gethash "passed" json) (contract-verification-result-passed result))
+    (setf (gethash "failed" json) (contract-verification-result-failed result))
     (setf (gethash "score" json) (verification-score result))
-    (setf (gethash "durationMs" json) (verification-result-duration-ms result))
+    (setf (gethash "durationMs" json) (contract-verification-result-duration-ms result))
     (setf (gethash "success" json) (verification-passed-p result))
     (setf (gethash "interactions" json)
           (mapcar #'interaction-result-to-json
-                  (verification-result-interaction-results result)))
+                  (contract-verification-result-interaction-results result)))
     json))
 
 (defun interaction-result-to-json (result)
@@ -165,7 +165,7 @@
   (format stream "Suggested Fixes:~%")
   (format stream "-------------------------------------------------------------------~%")
 
-  (dolist (error (verification-result-errors result))
+  (dolist (error (contract-verification-result-errors result))
     (format stream "~%")
     (format stream "~A:~%" (interaction-result-interaction-name error))
     (dolist (mismatch (interaction-result-mismatches error))

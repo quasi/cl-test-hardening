@@ -110,7 +110,8 @@
                "cl-test-hardening/operators"
                "cl-test-hardening/contract"
                "cl-test-hardening/agent"
-               "yason")
+               "yason"
+               "fiveam")
   :pathname "src/canon"
   :serial t
   :components ((:file "package")

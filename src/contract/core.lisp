@@ -114,9 +114,9 @@
   "Clear all registered schemas."
   (clrhash *schemas*))
 
-;;;; Verification Result
+;;;; Contract Verification Result
 
-(defstruct verification-result
+(defstruct contract-verification-result
   "Result of provider verification."
   (contract-name nil :type symbol)
   (provider-url nil :type (or null string))

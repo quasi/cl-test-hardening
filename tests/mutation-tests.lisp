@@ -7,7 +7,8 @@
 (in-package #:th.mutation-tests)
 
 (def-suite th.mutation-tests
-  :description "Tests for th.mutation")
+  :description "Tests for th.mutation"
+  :in :th.tests)
 
 (in-suite th.mutation-tests)
 

@@ -29,12 +29,15 @@
    #:*default-seed*
    ;; Results
    #:property-result
-   #:result-passed-p
-   #:result-counterexample
-   #:result-shrunk-counterexample
-   #:result-iterations
-   #:result-seed
-   #:result-error
+   #:property-result-passed-p
+   #:property-result-counterexample
+   #:property-result-shrunk-counterexample
+   #:property-result-iterations
+   #:property-result-seed
+   #:property-result-error
+   #:property-result-classifications
+   #:property-result-duration-ms
+   #:make-property-result
    ;; Registry
    #:find-property
    #:list-properties
