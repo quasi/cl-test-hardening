@@ -1,0 +1,61 @@
+feature:
+  name: contract
+  description: Consumer-driven contract testing (Pact-style)
+  status: implemented
+  confidence: 0.95
+
+triangulation:
+  docs_claim: "Consumer-driven contract testing (Pact-style)"
+  code_reality: "Full implementation with Pact generation, mock provider, and verification"
+  test_coverage: high
+  classification: convergent
+
+capabilities:
+  - Define consumer expectations
+  - Generate Pact JSON files
+  - Mock provider for consumer tests
+  - Verify provider against contracts
+  - Schema matching with matchers
+  - Interaction recording and replay
+
+dependencies:
+  system: cl-test-hardening/contract
+  depends_on:
+    - cl-test-hardening (core)
+    - cl-ppcre
+    - yason
+    - dexador
+    - local-time
+  provides:
+    - contract testing
+    - pact generation
+    - provider verification
+
+packages:
+  - th.contract
+
+contracts:
+  - contract-definition.md
+  - pact-workflow.md
+
+scenarios:
+  - consumer-testing.md
+  - provider-verification.md
+
+properties:
+  - contract-guarantees.md
+
+files:
+  implementation:
+    - src/contract/package.lisp
+    - src/contract/core.lisp
+    - src/contract/matchers.lisp
+    - src/contract/schema.lisp
+    - src/contract/interaction.lisp
+    - src/contract/pact-generator.lisp
+    - src/contract/mock-provider.lisp
+    - src/contract/verifier.lisp
+    - src/contract/reporting.lisp
+    - src/contract/macros.lisp
+  tests:
+    - tests/contract-tests.lisp
