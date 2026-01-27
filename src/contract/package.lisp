@@ -59,12 +59,17 @@
    #:mock-request
    #:verify-mock-interactions
 
-   ;; Matchers
+   ;; Matcher names (used as quoted symbols in patterns)
+   ;; Users write: '(type-of string), '(one-of "a" "b"), etc.
+   #:type-of
    #:string-matching
-   #:integer-matching
-   #:any-string
-   #:any-integer
-   #:any-boolean
+   #:integer-in-range
+   #:number-in-range
+   #:object-with
+   #:array-of
+   #:one-of
+   #:any-value
+   #:optional-field
 
    ;; Validation
    #:validate-against-schema))

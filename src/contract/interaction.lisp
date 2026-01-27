@@ -104,9 +104,12 @@
     ((null expected)
      (match-success))
 
-    ;; Expected is a matcher expression or schema
-    ((or (and (listp expected) (symbolp (first expected)))
-         (symbolp expected))
+    ;; Expected is a matcher expression (list starting with non-keyword symbol)
+    ;; or a schema reference (symbol, non-keyword)
+    ((or (and (listp expected)
+              (symbolp (first expected))
+              (not (keywordp (first expected))))
+         (and (symbolp expected) (not (keywordp expected))))
      (matches-p expected actual path))
 
     ;; Expected is a literal value

@@ -52,26 +52,26 @@
         (semantic-clause nil)
         (complexity-clause nil))
 
-    ;; Parse clauses
-    (loop for item in clauses
-          do (cond
-               ;; Top-level keyword options
-               ((eq item :agent-type)
-                nil)  ; Value comes next
-               ((keywordp item)
-                (when (eq (car (member item clauses)) :agent-type)
-                  (setf agent-type (cadr (member item clauses)))))
-               ;; Dimension clauses
-               ((and (listp item) (eq (car item) 'scope))
-                (setf scope-clause (cdr item)))
-               ((and (listp item) (eq (car item) 'hallucination))
-                (setf hallucination-clause (cdr item)))
-               ((and (listp item) (eq (car item) 'style))
-                (setf style-clause (cdr item)))
-               ((and (listp item) (eq (car item) 'semantic))
-                (setf semantic-clause (cdr item)))
-               ((and (listp item) (eq (car item) 'complexity))
-                (setf complexity-clause (cdr item)))))
+    ;; Parse clauses - handle both keyword args and dimension forms
+    ;; Note: Use string= for symbols to handle cross-package forms
+    (loop with remaining = clauses
+          while remaining
+          do (let ((item (pop remaining)))
+               (cond
+                 ;; :agent-type keyword followed by value
+                 ((eq item :agent-type)
+                  (setf agent-type (pop remaining)))
+                 ;; Dimension clause lists (compare symbol names for package independence)
+                 ((and (listp item) (string= (symbol-name (car item)) "SCOPE"))
+                  (setf scope-clause (cdr item)))
+                 ((and (listp item) (string= (symbol-name (car item)) "HALLUCINATION"))
+                  (setf hallucination-clause (cdr item)))
+                 ((and (listp item) (string= (symbol-name (car item)) "STYLE"))
+                  (setf style-clause (cdr item)))
+                 ((and (listp item) (string= (symbol-name (car item)) "SEMANTIC"))
+                  (setf semantic-clause (cdr item)))
+                 ((and (listp item) (string= (symbol-name (car item)) "COMPLEXITY"))
+                  (setf complexity-clause (cdr item))))))
 
     `(progn
        (register-policy

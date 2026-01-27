@@ -39,11 +39,12 @@
    #:result-survived
    #:result-total
 
-   ;; Standard operator sets
-   #:*standard-arithmetic*
-   #:*standard-conditional*
-   #:*standard-logical*
-   #:*standard-boundary*
+   ;; Standard operator set names (for find-operator-set)
+   #:standard-arithmetic
+   #:standard-conditional
+   #:standard-logical
+   #:standard-boundary
+   #:standard-return
 
    ;; Reporting
    #:format-mutation-report

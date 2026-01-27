@@ -23,14 +23,14 @@
 (test simple-pattern-match
   (multiple-value-bind (match bindings)
       (pattern-matches-p '(+ ?x ?y) '(+ 1 2))
-    (is match)
+    (is-true match)
     (is (equal 1 (cdr (assoc 'x bindings))))
     (is (equal 2 (cdr (assoc 'y bindings))))))
 
 (test nested-pattern-match
   (multiple-value-bind (match bindings)
       (pattern-matches-p '(if ?cond ?then ?else) '(if (> x 0) "pos" "neg"))
-    (is match)
+    (is-true match)
     (is (equal '(> x 0) (cdr (assoc 'cond bindings))))
     (is (equal "pos" (cdr (assoc 'then bindings))))
     (is (equal "neg" (cdr (assoc 'else bindings))))))

@@ -5,7 +5,7 @@
 
 ;;;; define-property macro
 
-(defmacro define-property (name &key for-all holds when classify tags timeout)
+(defmacro define-property (name &key for-all (holds nil holds-supplied-p) when classify tags timeout)
   "Define a property-based test.
 
 NAME: Symbol naming the property.
@@ -29,7 +29,7 @@ Example:
     :tags (:sorting :invariant))"
   (unless for-all
     (error "define-property requires :for-all bindings"))
-  (unless holds
+  (unless holds-supplied-p
     (error "define-property requires :holds predicate"))
 
   ;; Validate for-all syntax
