@@ -25,3 +25,22 @@
         (progn ,@body)
         (round (* 1000 (/ (- (get-internal-real-time) ,start)
                           internal-time-units-per-second)))))))
+
+(defmacro with-internals (package-designator (&rest symbol-names) &body body)
+  "Execute BODY with SYMBOL-NAMES resolved from PACKAGE-DESIGNATOR.
+Performs compile-time symbol substitution so unqualified names in BODY
+refer to internal symbols of the target package. Useful for testing
+private implementation details without :: clutter.
+
+Example:
+  (with-internals :my-library (internal-class internal-fn)
+    (let ((obj (make-instance 'internal-class)))
+      (is (internal-fn obj))))"
+  (let* ((pkg (or (find-package package-designator)
+                  (error "Package ~A not found" package-designator)))
+         (mappings (mapcar (lambda (name)
+                             (cons name (or (find-symbol (string name) pkg)
+                                           (error "Symbol ~A not found in ~A"
+                                                  name package-designator))))
+                           symbol-names)))
+    `(progn ,@(sublis mappings body :test #'eq))))

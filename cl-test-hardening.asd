@@ -135,6 +135,7 @@
   :pathname "tests"
   :serial t
   :components ((:file "test-package")
+               (:file "core-tests")
                (:file "generator-tests")
                (:file "shrinking-tests")
                (:file "property-tests")

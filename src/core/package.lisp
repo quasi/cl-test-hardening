@@ -19,4 +19,7 @@
 
    ;; Common utilities
    #:current-timestamp
-   #:measure-time))
+   #:measure-time
+
+   ;; Test helpers
+   #:with-internals))
