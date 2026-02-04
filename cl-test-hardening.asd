@@ -110,6 +110,16 @@
                (:file "core"))
   :in-order-to ((test-op (test-op "cl-test-hardening/tests"))))
 
+;;; Harness Module - Declarative test environment setup
+(defsystem "cl-test-hardening/harness"
+  :description "Declarative test environment setup to eliminate boilerplate preambles"
+  :depends-on ("cl-test-hardening")
+  :pathname "src/harness"
+  :serial t
+  :components ((:file "package")
+               (:file "core"))
+  :in-order-to ((test-op (test-op "cl-test-hardening/tests"))))
+
 ;;; Canon Adapter - Integration with Canon specification system
 (defsystem "cl-test-hardening/canon"
   :description "Canon specification adapter for cl-test-hardening"
@@ -137,7 +147,8 @@
                "cl-test-hardening/operators"
                "cl-test-hardening/contract"
                "cl-test-hardening/agent"
-               "cl-test-hardening/fixture"))
+               "cl-test-hardening/fixture"
+               "cl-test-hardening/harness"))
 
 ;;; Test System
 (defsystem "cl-test-hardening/tests"
@@ -148,6 +159,7 @@
   :components ((:file "test-package")
                (:file "core-tests")
                (:file "fixture-tests")
+               (:file "harness-tests")
                (:file "generator-tests")
                (:file "shrinking-tests")
                (:file "property-tests")

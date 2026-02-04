@@ -18,6 +18,10 @@
   :description "Fixture module tests"
   :in :th.tests)
 
+(def-suite :th.harness-tests
+  :description "Harness module tests"
+  :in :th.tests)
+
 (def-suite :th.property-tests
   :description "Property testing module tests"
   :in :th.tests)
