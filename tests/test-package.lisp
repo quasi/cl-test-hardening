@@ -14,6 +14,10 @@
   :description "Core module tests"
   :in :th.tests)
 
+(def-suite :th.fixture-tests
+  :description "Fixture module tests"
+  :in :th.tests)
+
 (def-suite :th.property-tests
   :description "Property testing module tests"
   :in :th.tests)

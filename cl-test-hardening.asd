@@ -100,6 +100,16 @@
                (:file "macros"))
   :in-order-to ((test-op (test-op "cl-test-hardening/tests"))))
 
+;;; Fixture Module - Test fixture registry
+(defsystem "cl-test-hardening/fixture"
+  :description "Test fixture registry with factory functions and context macros"
+  :depends-on ("cl-test-hardening")
+  :pathname "src/fixture"
+  :serial t
+  :components ((:file "package")
+               (:file "core"))
+  :in-order-to ((test-op (test-op "cl-test-hardening/tests"))))
+
 ;;; Canon Adapter - Integration with Canon specification system
 (defsystem "cl-test-hardening/canon"
   :description "Canon specification adapter for cl-test-hardening"
@@ -126,7 +136,8 @@
                "cl-test-hardening/mutation"
                "cl-test-hardening/operators"
                "cl-test-hardening/contract"
-               "cl-test-hardening/agent"))
+               "cl-test-hardening/agent"
+               "cl-test-hardening/fixture"))
 
 ;;; Test System
 (defsystem "cl-test-hardening/tests"
@@ -136,6 +147,7 @@
   :serial t
   :components ((:file "test-package")
                (:file "core-tests")
+               (:file "fixture-tests")
                (:file "generator-tests")
                (:file "shrinking-tests")
                (:file "property-tests")
