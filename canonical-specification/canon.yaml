@@ -1,0 +1,17 @@
+canon:
+  name: cl-test-hardening
+  version: 0.1.0
+  description: Test hardening library for Common Lisp - hardens tests so they don't lie to you
+  language: common-lisp
+  test_framework: fiveam
+
+metadata:
+  extracted_from_code: true
+  extraction_date: 2026-01-27
+  extraction_version: 0.2.0
+
+modules:
+  - property
+  - mutation
+  - contract
+  - agent

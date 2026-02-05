@@ -1,0 +1,80 @@
+survey:
+  completed: 2026-01-27T20:33:00Z
+  sources_examined:
+    - path: README.md
+      type: overview
+      last_modified: recent
+      staleness: low
+
+    - path: CLAUDE.md
+      type: development_guide
+      last_modified: recent
+      staleness: low
+
+    - path: docs/
+      type: directory
+      status: empty
+      notes: No additional documentation found
+
+claims:
+  vocabulary:
+    - term: "Property-based testing"
+      source: README.md:7
+      definition: "Testing with shrinking for better test coverage"
+      confidence: high
+
+    - term: "Mutation testing"
+      source: README.md:8
+      definition: "Test quality verification through code mutation"
+      confidence: high
+
+    - term: "Contract testing"
+      source: README.md:9
+      definition: "Consumer-driven contract testing (Pact-style)"
+      confidence: high
+
+    - term: "Agent verification"
+      source: README.md:10
+      definition: "AI-generated code verification"
+      confidence: high
+
+  features:
+    - name: "Property Testing Module"
+      sources:
+        - README.md:7
+        - cl-test-hardening.asd:17-29
+      confidence: high
+
+    - name: "Mutation Testing Module"
+      sources:
+        - README.md:8
+        - cl-test-hardening.asd:42-54
+      confidence: high
+
+    - name: "Contract Testing Module"
+      sources:
+        - README.md:9
+        - cl-test-hardening.asd:64-83
+      confidence: high
+
+    - name: "Agent Verification Module"
+      sources:
+        - README.md:10
+        - cl-test-hardening.asd:86-101
+      confidence: high
+
+  architecture:
+    - claim: "Modular design with independent loadable modules"
+      source: README.md:14-19, cl-test-hardening.asd
+      confidence: high
+      verification_needed: false
+
+    - claim: "Shared core with result protocol"
+      source: cl-test-hardening.asd:4-14
+      confidence: high
+      verification_needed: false
+
+    - claim: "Generators and operators as separate sub-systems"
+      source: cl-test-hardening.asd:32-61
+      confidence: high
+      verification_needed: false

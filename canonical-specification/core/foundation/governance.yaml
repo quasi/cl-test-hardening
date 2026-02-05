@@ -1,0 +1,40 @@
+principles:
+  - id: MODULAR_INDEPENDENCE
+    name: Modular Independence
+    description: Each testing module (property, mutation, contract, agent) must be independently loadable and usable without dependencies on other modules
+    guardrails:
+      - No cross-module dependencies except through th.core
+      - Each module has its own ASDF system definition
+      - Modules can be loaded individually via ql:quickload
+
+  - id: RESULT_UNIFORMITY
+    name: Result Uniformity
+    description: All verification results follow the same protocol for consistent reporting and integration
+    guardrails:
+      - All modules return verification-result objects
+      - Standard slots (passed-p, timestamp, duration-ms, summary, details) required
+      - Generic functions for formatting (format-result, format-summary, format-failure)
+
+  - id: BACKWARD_COMPATIBILITY
+    name: Backward Compatibility
+    description: Public APIs remain stable across versions
+    guardrails:
+      - No breaking changes to exported symbols without major version bump
+      - Deprecation warnings before removal
+      - Documentation of migration paths
+
+  - id: ZERO_CONFIGURATION
+    name: Zero Configuration
+    description: Modules work out-of-the-box with sensible defaults
+    guardrails:
+      - No required configuration for basic usage
+      - Defaults cover common use cases
+      - Configuration available for advanced needs
+
+  - id: TEST_HERMITICITY
+    name: Test Hermiticity
+    description: Tests must not depend on external state or order of execution
+    guardrails:
+      - No shared global state between tests
+      - Each test cleans up after itself
+      - Tests can run in any order

@@ -1,0 +1,46 @@
+observations:
+  - id: obs-init-001
+    category: code_only
+    subject: Canon adapter module
+    pass: structural
+    timestamp: 2026-01-27T20:34:00Z
+
+    sources:
+      code:
+        location: src/canon/adapter.lisp
+        claim: "Canon specification adapter exists"
+        confidence: 0.95
+        git_commit: 7d80bb3
+
+      documentation:
+        location: null
+        claim: "Not mentioned in README"
+        confidence: 0.0
+
+    triangulation:
+      status: code_only
+      agreeing_sources: [code]
+      disagreeing_sources: []
+
+    confidence_score: 0.85
+    confidence_breakdown:
+      base: 0.7
+      test_coverage_bonus: 0.15
+
+    interpretation: "Recently added feature, documentation not yet updated"
+    provisional_choice: "Document in README module list"
+    provisional_rationale: |
+      - Added 3 commits ago (commit 7d80bb3)
+      - Part of recent consolidation effort
+      - Has test coverage (referenced in test system)
+      - Provides Canon integration functionality
+
+    affects:
+      - README.md module list
+      - canon/features/canon/feature.yaml (should be created)
+
+    blocking: false
+    resolved: true
+    resolution: "Added to README.md and fully documented in canon/features/canon/"
+    resolved_date: 2026-01-27T23:50:00Z
+    recommendation: "Add to README: '- **canon** - Canon specification integration'"

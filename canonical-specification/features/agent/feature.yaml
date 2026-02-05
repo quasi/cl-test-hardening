@@ -1,0 +1,64 @@
+feature:
+  name: agent
+  description: AI-generated code verification across five dimensions
+  status: implemented
+  confidence: 0.95
+
+triangulation:
+  docs_claim: "AI-generated code verification"
+  code_reality: "Full implementation with five verification dimensions"
+  test_coverage: high
+  classification: convergent
+
+capabilities:
+  - Detect scope violations
+  - Identify API hallucinations
+  - Check style consistency
+  - Verify semantic correctness
+  - Analyze code complexity
+  - Generate verification reports
+
+verification_dimensions:
+  - scope: "Code stays within specified boundaries"
+  - hallucination: "No references to non-existent APIs"
+  - style: "Consistent with codebase conventions"
+  - semantics: "Logically correct implementation"
+  - complexity: "Appropriately simple implementation"
+
+dependencies:
+  system: cl-test-hardening/agent
+  depends_on:
+    - cl-test-hardening (core)
+    - cl-ppcre
+    - uiop
+  provides:
+    - agent code verification
+    - multi-dimensional analysis
+    - violation detection
+
+packages:
+  - th.agent
+
+contracts:
+  - agent-verification.md
+
+scenarios:
+  - multi-dimensional-verification.md
+
+properties:
+  - verification-guarantees.md
+
+files:
+  implementation:
+    - src/agent/package.lisp
+    - src/agent/core.lisp
+    - src/agent/violations.lisp
+    - src/agent/scope.lisp
+    - src/agent/hallucination.lisp
+    - src/agent/style.lisp
+    - src/agent/semantics.lisp
+    - src/agent/complexity.lisp
+    - src/agent/reporting.lisp
+    - src/agent/macros.lisp
+  tests:
+    - tests/agent-tests.lisp

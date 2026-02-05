@@ -1,0 +1,76 @@
+strategy:
+  name: cl-test-hardening verification
+  description: Multi-tier verification strategy for test hardening library
+
+verification:
+  test_framework: fiveam
+  test_command: "(ql:quickload \"cl-test-hardening/tests\") (5am:run! :th.tests)"
+  coverage_target: 0.80
+
+tiers:
+  - name: default
+    description: Structure and static analysis only
+    checks:
+      - Canon structure completeness
+      - Contract schema validation
+      - Vocabulary consistency
+      - Traceability checks
+
+  - name: full
+    description: Includes unit and integration tests
+    checks:
+      - All default tier checks
+      - FiveAM test suite execution
+      - Module independence verification
+      - API contract adherence
+    requirements:
+      test_framework: fiveam
+      test_path: tests/
+
+  - name: live
+    description: Full verification including smoke tests
+    checks:
+      - All full tier checks
+      - Module loading tests
+      - Generator execution
+      - Mutation operator application
+      - Contract pact generation
+    requirements:
+      test_framework: fiveam
+      test_path: tests/
+      runtime: sbcl
+
+integration_points:
+  - name: property-generators
+    type: api
+    verification: Generators produce valid test data
+
+  - name: mutation-operators
+    type: api
+    verification: Operators produce syntactically valid mutations
+
+  - name: contract-pacts
+    type: file
+    verification: Pacts are valid JSON and reference existing interactions
+
+  - name: result-protocol
+    type: protocol
+    verification: All modules return verification-result objects
+
+confidence_thresholds:
+  minimum: 0.70
+  target: 0.85
+  excellent: 0.95
+
+anti_patterns:
+  - pattern: mock.*save.*database
+    severity: error
+    message: Database interactions should not be mocked in integration tests
+
+  - pattern: sleep\(
+    severity: warning
+    message: Avoid sleep-based synchronization, use proper synchronization primitives
+
+  - pattern: defparameter.*\*.*test
+    severity: warning
+    message: Test state should not use global parameters

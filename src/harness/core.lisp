@@ -98,10 +98,10 @@ EXTRA-SYSTEMS: Additional systems to quickload."
        (list `(in-package ,(harness-package harness)))
        ;; 5. Define suite (optional)
        (when suite-name
-         (list `(fiveam:def-suite ,suite-name
+         (list `(,(find-symbol "DEF-SUITE" "FIVEAM") ,suite-name
                   :description ,(or suite-description
                                     (format nil "~A tests" suite-name)))
-               `(fiveam:in-suite ,suite-name)))))))
+               `(,(find-symbol "IN-SUITE" "FIVEAM") ,suite-name)))))))
 
 ;;;; Setup macro
 
