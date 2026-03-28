@@ -4,6 +4,7 @@
 (defpackage #:th.property
   (:use #:cl #:alexandria #:th.core)
   (:nicknames #:th.prop)
+  (:shadow #:format-result #:format-summary)
   (:export
    ;; Property definition
    #:define-property
